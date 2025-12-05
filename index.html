@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tienda de Bebés - Mis Pequeños Tesoros</title>
+
+
+<style>
+body {
+font-family: "Arial", sans-serif;
+background-color: #FDF6F0; /* crema pastel */
+margin: 0;
+padding: 0;
+color: #555;
+}
+.nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 22px;
+            font-weight: bold;
+            color: #ff7ba8;
+        }
+
+        .logo-icon {
+            width: 40px;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+        }
+.nav-links li a {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: #555;
+            font-size: 18px;
+            transition: 0.3s;
+        }
+
+        .nav-links li a img {
+            width: 22px;
+        }
+
+        .nav-links li a:hover {
+            color: #ff7ba8;
+        }
+
+        /* BOTÓN HAMBURGUESA */
+        .nav-toggle {
+            display: none;
+            font-size: 28px;
+            background: none;
+            border: none;
+            color: #ff7ba8;
+            cursor: pointer;
+        }
+@media (max-width: 768px) {
+            .nav-links {
+                position: absolute;
+                top: 70px;
+                right: 0;
+                background: #ffeef4;
+                width: 100%;
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+                padding: 20px 0;
+                display: none;
+            }
+
+            .nav-links.show {
+                display: flex;
+            }
+
+            .nav-toggle {
+                display: block;
+            }
+        }
+
+header {
+background-color: #F8D7E2; /* rosa pastel */
+padding: 30px;
+text-align: center;
+border-bottom: 4px solid #F3B8C4;
+}
+
+header h1 {
+margin: 0;
+font-size: 2.5rem;
+color: #A85C7A;
+}
+
+header p {
+margin: 0;
+font-size: 1.1rem;
+}
+
+
+.contenedor {
+width: 90%;
+max-width: 1100px;
+margin: 40px auto;
+}
+
+.tarjetas {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+gap: 20px;
+}
+
+
+.tarjeta {
+background-color: #FFFFFF;
+padding: 20px;
+border-radius: 12px;
+box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+text-align: center;
+
+
+}
+
+
+.tarjeta img {
+width: 100%;
+border-radius: 12px;
+   
+}
+
+.tarjeta h3 {
+color: #8BA6A9; /* azul verdoso pastel */
+}
+
+.inicio {
+    position: relative;
+    width: 100%;
+    height: 90vh;
+    background: linear-gradient(135deg, #FDE2E4, #FFF1F7, #F8D4EC);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Contenido */
+.inicio-contenido {
+    z-index: 2;
+    animation: aparecer 1.3s ease-out forwards;
+    opacity: 0;
+}
+.titulo {
+    font-size: 3rem;
+    color: #A85C7A;
+    margin-bottom: 10px;
+    animation: subir 1.3s ease-out forwards;
+}
+
+.subtitulo {
+    font-size: 1.4rem;
+    color: #555;
+    margin-bottom: 25px;
+    animation: subir 1.5s ease-out forwards;
+}
+
+/* Botón */
+.boton-inicio {
+    display: inline-block;
+    background: #A85C7A;
+    color: #fff;
+    padding: 12px 28px;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    text-decoration: none;
+    transition: 0.3s;
+    animation: aparecer 1.7s ease-out forwards;
+    opacity: 0;
+}
+
+.boton-inicio:hover {
+    background: #8d4563;
+    transform: scale(1.05);
+}
+
+@keyframes aparecer {
+    0% { opacity: 0; transform: scale(0.95); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes subir {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+.fondo-burbujas {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.fondo-burbujas span {
+    position: absolute;
+    display: block;
+    width: 20px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.7);
+    box-shadow: 0 0 10px #fff;
+    border-radius: 50%;
+    bottom: -150px;
+    animation: burbujas 10s linear infinite;
+    animation-duration: calc(120s / var(--i));
+}
+@keyframes burbujas {
+    0% { transform: translateY(0) scale(0.8); }
+    100% { transform: translateY(-1000px) scale(1.3); }
+}
+
+footer {
+background-color: #D7EAF3; /* azul pastel suave */
+text-align: center;
+padding: 20px;
+margin-top: 40px;
+color: #496B72;
+}
+
+.ofertas {
+    text-align: center;
+    padding: 40px 20px;
+    background: #fff6fa;
+}
+
+.ofertas h2 {
+    font-size: 2rem;
+    color: #c86fa3;
+    margin-bottom: 25px;
+    font-weight: bold;
+}
+
+.ofertas-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.oferta-card {
+    background: white;
+    width: 280px;
+    padding: 15px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    text-align: center;
+    transition: transform .3s;
+}
+
+.oferta-card img {
+    width: 100%;
+    border-radius: 12px;
+}
+
+.oferta-card:hover {
+    transform: scale(1.05);
+}
+
+.precio-original {
+    text-decoration: line-through;
+    color: #999;
+    font-size: 1rem;
+}
+
+.precio-descuento {
+    font-size: 1.4rem;
+    color: #e76ca8;
+    font-weight: bold;
+}
+
+.descripcion {
+    margin-top: 10px;
+    color: #555;
+    font-size: 0.9rem;
+}
+.empleados-panel {
+  background: #f7f0ff;
+  padding: 40px;
+  border-radius: 25px;
+  margin-top: 40px;
+  box-shadow: 0 0 25px rgba(170, 134, 255, 0.15);
+}
+
+/* TÍTULO */
+.titulo-empleados {
+  text-align: center;
+  color: #a26ad8;
+  font-size: 2rem;
+  margin-bottom: 30px;
+  font-weight: bold;
+}
+
+/* CONTENEDOR DE TARJETAS */
+.empleado-contenedor {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+/* TARJETAS */
+.card-empleado {
+  background: #ffffff;
+  padding: 20px;
+  width: 280px;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(198, 164, 255, 0.2);
+  transition: transform 0.2s ease;
+}
+
+.card-empleado:hover {
+  transform: scale(1.03);
+}
+
+.card-empleado h3 {
+  color: #b078e4;
+  margin-bottom: 15px;
+}
+
+/* CAMPOS */
+.card-empleado input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #d8c2ff;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+/* BOTONES */
+.card-empleado button {
+  width: 100%;
+  background: #b078e4;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.card-empleado button:hover {
+  background: #995fd1;
+}
+
+/* BOTÓN ROJO ELIMINAR */
+.btn-eliminar {
+  background: #ff8a8a !important;
+}
+
+.btn-eliminar:hover {
+  background: #ff6b6b !important;
+}
+
+/* LISTA DE EMPLEADOS */
+.lista-title {
+  margin-top: 30px;
+  text-align: center;
+  color: #a26ad8;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.lista-empleados {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 20px;
+  list-style: none;
+  box-shadow: 0 8px 20px rgba(170, 134, 255, 0.15);
+}
+
+.lista-empleados li {
+  background: #f2eaff;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 8px;
+  color: #623d8f;
+  font-weight: bold;
+}
+</style>
+</head>
+
+
+<body>
+<nav class="navbar">
+    <div class="nav-logo">
+        <img src="https://cdn-icons-png.flaticon.com/512/3461/3461505.png" class="logo-icon">
+        <span>Mis Pequeños Tesoros</span>
+    </div>
+
+    <button class="nav-toggle" id="nav-toggle">☰</button>
+
+    <ul class="nav-links" id="nav-links">
+        <li><a href="#inicio"><img src="https://cdn-icons-png.flaticon.com/512/1946/1946488.png"> Inicio</a></li>
+        <li><a href="#productos"><img src="iconoproducto.jpg"> Productos</a></li>
+        <li><a href="#ofertas"><img src="iconooferta.jpg"> Ofertas</a></li>
+        <li><a href="#empleados"><img src="iconoempleado.jpg"> Empleado</a></li>
+    </ul>
+</nav>
+
+
+<header>
+<section id="inicio" class="inicio">
+    <div class="inicio-contenido">
+        <h1 class="titulo">Mis Pequeños Tesoros</h1>
+        <p class="subtitulo">Cuidando lo que más vale 💕</p>
+        <a href="#productos" class="boton-inicio">Ver Productos</a>
+    </div>
+
+    <div class="fondo-burbujas">
+        <span style="--i:11"></span>
+        <span style="--i:14"></span>
+        <span style="--i:18"></span>
+        <span style="--i:22"></span>
+        <span style="--i:17"></span>
+        <span style="--i:25"></span>
+    </div>
+</section>
+<header>
+<h1>Mis Pequeños Tesoros</h1>
+<p>Cuidando lo que más vale</p>
+</header>
+
+<section id="productos">
+<h2 style="color:#A85C7A; text-align:center;">Productos Destacados</h2>
+
+
+<div class="tarjetas">
+<div class="tarjeta">
+<img src="producto1.jpg" alt="producto 1">
+<h3>Mameluco Pastel</h3>
+<p>Suave, cómodo y adorable.</p>
+</div>
+<div class="tarjeta">
+<img src="producto2.jpg" alt="producto 2">
+<h3>Cobija Suave</h3>
+<p>Perfecta para mantener a tu bebé calientito.</p>
+</div>
+
+<div class="tarjeta">
+<img src="productos3.jpg" alt="producto 3">
+<h3>Juguete Sensorial</h3>
+<p>Ideal para estimular sus sentidos.</p>
+</div>
+</div>
+</div>
+<section id="empleados" class="empleados-panel">
+  <h2 class="titulo-empleados">Gestión de Empleados</h2>
+
+  <div class="empleado-contenedor">
+
+    <!-- Tarjeta Agregar -->
+    <div class="card-empleado">
+      <h3>Agregar Empleado</h3>
+      <input type="text" id="addNombre" placeholder="Nombre" required>
+      <input type="text" id="addPuesto" placeholder="Puesto" required>
+      <button onclick="agregarEmpleado()">Agregar</button>
+    </div>
+
+    <!-- Tarjeta Actualizar -->
+    <div class="card-empleado">
+      <h3>Actualizar Empleado</h3>
+      <input type="number" id="updateID" placeholder="ID" required>
+      <input type="text" id="updateNombre" placeholder="Nuevo Nombre">
+      <input type="text" id="updatePuesto" placeholder="Nuevo Puesto">
+      <button onclick="actualizarEmpleado()">Actualizar</button>
+    </div>
+
+    <!-- Tarjeta Eliminar -->
+    <div class="card-empleado">
+      <h3>Eliminar Empleado</h3>
+      <input type="number" id="deleteID" placeholder="ID" required>
+      <button class="btn-eliminar" onclick="eliminarEmpleado()">Eliminar</button>
+    </div>
+  </div>
+
+  <h3 class="lista-title">Lista de Empleados</h3>
+  <ul id="listaEmpleados" class="lista-empleados"></ul>
+</section>
+
+<section class="ofertas">
+    <h2>Ofertas Especiales</h2>
+
+    <div class="ofertas-container">
+
+        <div class="oferta-card">
+            <img src="mamelucorosa.jpg" alt="Oferta Mameluco">
+            <h3>Mameluco Rosa</h3>
+            <p class="precio-original">$380</p>
+            <p class="precio-descuento">$299</p>
+            <p class="descripcion">Suave y cómodo para tu bebé.</p>
+        </div>
+
+        <div class="oferta-card">
+            <img src="cobijasuave.jpg" alt="Cobija en oferta">
+            <h3>Cobija Suave</h3>
+            <p class="precio-original">$450</p>
+            <p class="precio-descuento">$349</p>
+            <p class="descripcion">Perfecta para mantenerlo calientito.</p>
+        </div>
+
+        <div class="oferta-card">
+            <img src="juguete.jpg" alt="Juguete sensorial">
+            <h3>Juguete Sensorial</h3>
+            <p class="precio-original">$280</p>
+            <p class="precio-descuento">$199</p>
+            <p class="descripcion">Estimula los sentidos del bebé.</p>
+        </div>
+
+    </div>
+</section>
+
+<footer>
+<p>© 2025 Mis Pequeños Tesoros - Todos los derechos reservados</p>
+</footer>
+
+
+
+</body>
+</html>
